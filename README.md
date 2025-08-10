@@ -63,3 +63,25 @@ files IN A <IP-DEL-HOST>
         - Linux/macOS: ifconfig o ip a (Busca inet en eth0 o wlan0).
 
 - El Serial debe incrementarse cada vez que modifiques el archivo (ej: 2023082502).
+
+## 📂 Creación de las demás carpetas
+
+### En la carpeta `volumes/` crea las siguientes carpetas:
+
+```txt
+./volumes/
+├── filebrowser/      # Carpeta para el servidor Filebrowser
+|  ├── srv/             # Carpeta para el servidor Filebrowser
+|  ├── database/        # Carpeta para la base de datos de Filebrowser
+|  └── config/          # Carpeta para la configuración de Filebrowser
+├── dns/              # Carpeta para el servidor DNS
+├── pgadmin/          # Carpeta para el servidor PgAdmin
+├── postgres/         # Carpeta para el servidor PostgreSQL
+└── portainer/        # Carpeta para el servidor Portainer
+```
+
+## Correr los contenedores
+
+```bash
+> docker-compose up -d
+```
