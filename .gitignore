@@ -1,0 +1,4 @@
+volumes/postgres/
+volumes/pgadmin/
+volumes/portainer/
+volumes/filebrowser/

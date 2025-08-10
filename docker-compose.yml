@@ -1,0 +1,61 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data
+      - ./volumes/pgadmin/imports:/imports
+
+  filebrowser:
+    image: filebrowser/filebrowser
+    container_name: filebrowser
+    volumes:
+      - ./volumes/filebrowser/srv:/srv
+      - ./volumes/filebrowser/database:/database
+      - ./volumes/filebrowser/config:/config
+
+  
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    volumes:
+      - ./volumes/pgadmin:/var/lib/pgadmin
+
+  portainer:
+    container_name: portainer
+    image: portainer/portainer
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./volumes/portainer:/data
+
+  nginx:
+    container_name: nginx
+    image: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./volumes/nginx/services.conf:/etc/nginx/conf.d/services.conf
+      - ./volumes/nginx/certs:/etc/nginx/certs
+    depends_on:
+      - portainer
+      - pgadmin
+      - filebrowser
+    
+  dns:
+    container_name: dns
+    image: coredns/coredns
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    volumes:
+      - ./volumes/dns/Corfile:/Corefile
+      - ./volumes/dns/dev.local.db:/etc/coredns/dev.local.db
