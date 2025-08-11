@@ -53,6 +53,7 @@ ns1 IN A <IP-DEL-HOST>
 pgadmin IN A <IP-DEL-HOST>
 portainer IN A <IP-DEL-HOST>
 files IN A <IP-DEL-HOST>
+postgres IN A <IP-DEL-HOST>
 ```
 
 **Importante**:

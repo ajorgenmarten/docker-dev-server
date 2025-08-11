@@ -9,7 +9,6 @@ services:
       POSTGRES_PASSWORD: root
     volumes:
       - ./volumes/postgres:/var/lib/postgresql/data
-      - ./volumes/pgadmin/imports:/imports
 
   filebrowser:
     image: filebrowser/filebrowser
